@@ -2,30 +2,18 @@
   text-align: center;
 }
 
-.route {
-  margin-top:50px;
-  text-align: center;
-}
-
-form {
-  margin: 0 auto;
-  padding : 20px;
-  width: 500px;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-}
-
-.label {
+.accValue {
   display: inline-block;
-  width: 100px;
+  width: 220px;
+  height: 25px;
 }
 
-/* .nav-items {
+.nav-items {
   list-style: none;
   margin: 0 auto;
-} */
+}
 
-/* .nav-item {
+.nav-item {
   display: inline-block;
   height: 80px;
   padding: 0 10px;
@@ -33,12 +21,31 @@ form {
   min-width: 80px;
   margin: 0 10px;
   line-height: 80px;
-} */
+}
+
+.route {
+  margin-top: 50px;
+  text-align: center;
+}
+
+form {
+  margin: 0 auto;
+  padding: 20px;
+  width: 500px;
+  border:1px solid lightgrey;
+  border-radius: 10px;
+}
 
 a {
   text-decoration: none;
 }
 
+.label {
+  display: inline-block;
+  width: 100px;
+  
+}
 
-
-
+.label-text {
+  text-align: center;
+}

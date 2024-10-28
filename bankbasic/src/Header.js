@@ -13,7 +13,6 @@ const Header = () => {
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/"><i><b>kosta bank</b></i></NavbarBrand>
           <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="/">로그인</NavLink>
@@ -21,7 +20,7 @@ const Header = () => {
               <NavItem>
                 <NavLink href="/join">회원가입</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              <UncontrolledDropdown nav>
                 <DropdownToggle tag="a" nav caret>계좌</DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem tag="a" href="/makeAccount">계좌개설</DropdownItem>
@@ -32,7 +31,6 @@ const Header = () => {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-          </Collapse>
         </Navbar>
     </div>
     )
