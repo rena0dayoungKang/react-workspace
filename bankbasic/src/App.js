@@ -12,7 +12,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'; // react 최신�
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         <Header/>
         <Routes>

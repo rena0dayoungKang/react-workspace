@@ -4,6 +4,7 @@ import CollapseEx from './CollapseEx';
 import FadeEx from './FadeEx';
 import ModalEx from './ModalEx';
 import 'bootstrap/dist/css/bootstrap.css';
+import TooltipEx from './TooltipEx';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* <CarouselEx/> */}
       {/* <CollapseEx/> */}
       {/* <FadeEx/> */}
-      <ModalEx/>
+      {/* <ModalEx/> */}
+      <TooltipEx/>
     </div>
   );
 }
