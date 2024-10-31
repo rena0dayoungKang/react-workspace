@@ -1,18 +1,25 @@
-import {Table} from 'reactstrap';
+import { Table } from 'reactstrap';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function AllAccountInfo() {
-    const accs = [
-        {id:'10001', name:'홍길동', balance:1000000, type:'일반계좌', grade:''},
-        {id:'10002', name:'송길동', balance:2000000, type:'특수계좌', grade:'VIP'},
-        {id:'10003', name:'하길동', balance:3000000, type:'일반계좌', grade:''},
-        {id:'10004', name:'구길동', balance:4000000, type:'특수계좌', grade:'Gold'},
-        {id:'10005', name:'차길동', balance:5000000, type:'일반계좌', grade:'Silver'},
-    ];
+    const [accs, setAccs] = useState([])
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/allAccountInfo")
+            .then(res => {
+                console.log(res.data);
+                setAccs([...res.data]);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
     return (
         <div className='route'>
-            <h4>전체 계좌 조회</h4>
-            <br/>
-            <Table bordered style={{width:'800px', margin:'0 auto'}}>
+            <h5 className='accTitle'>전체 계좌 조회</h5><br />
+            <Table bordered style={{ width: '800px', margin: '0 auto' }}>
                 {/* 대문자 Table은 reactstrap에서 만들어 놓은 것 */}
                 <tbody>
                     {/* 소문자는 그냥 html 태그임 */}
