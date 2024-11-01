@@ -3,10 +3,10 @@ import { useState } from 'react';
 import axios from "axios";
 
 export default function Login() {
-    const [login, setLogin] = useState({id:'', password:''});
+    const [login, setLogin] = useState({ id: '', password: '' });
 
     const edit = (e) => {
-        setLogin({...login, [e.target.name] : e.target.value});
+        setLogin({ ...login, [e.target.name]: e.target.value });
     }
 
     const submit = (e) => {
@@ -14,6 +14,7 @@ export default function Login() {
             .then(res => {
                 console.log(res.data);
                 alert("로그인 성공");
+                window.location.href = "/makeAccount";
             })
             .catch(err => {
                 console.log(err);
