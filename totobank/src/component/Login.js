@@ -1,9 +1,11 @@
 import { Button, Col, FormGroup, Label, Input } from "reactstrap";
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from "axios";
 
 export default function Login() {
     const [login, setLogin] = useState({ id: '', password: '' });
+    const dispatch = useDispatch();
 
     const edit = (e) => {
         setLogin({ ...login, [e.target.name]: e.target.value });
@@ -13,7 +15,8 @@ export default function Login() {
         axios.post("http://localhost:8080/login", login)
             .then(res => {
                 console.log(res.data);
-                alert("로그인 성공");
+                dispatch({type:'USER', data:{...res.data}});
+                // alert("로그인 성공");
                 window.location.href = "/makeAccount";
             })
             .catch(err => {

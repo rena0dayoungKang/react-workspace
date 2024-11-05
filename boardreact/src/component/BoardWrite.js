@@ -1,5 +1,5 @@
 import { Table, Input, Button, Label } from 'reactstrap';
-import { useState } from 'react'; //랜더링을 위한 useState사용. 리액트의 장점은 랜더링
+import { useState, useRef } from 'react'; //랜더링을 위한 useState사용. 리액트의 장점은 랜더링
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { url } from '../config';
@@ -13,6 +13,8 @@ const BoardWrite = () => {
 
     //useNavigate
     const navigate = useNavigate();
+
+    const fRef = useRef();
 
     const divStyle = {
         margin: '0 auto',
@@ -59,6 +61,14 @@ const BoardWrite = () => {
         }
     }
 
+    const delFile = (file) => {
+        setFileList({...fileList.filter(f => f!==file)});
+    }
+    
+    const fileClick = (e) => {
+        fRef.current.click();
+    }
+
 
     return (
         <div>
@@ -93,8 +103,12 @@ const BoardWrite = () => {
                                 <Input type="file" id="file" accept='image/*' hidden onChange={fileChange} />
                                 {
                                     fileList.map((file, index) =>
-                                        <span>
-                                            <img src={URL.createObjectURL(file)} width="100px" alt='' style={{ marginRight: "10px" }} />
+                                        <span key={index}>
+                                            <div style={{display:"inline-block"}}>
+                                                <img style={{display:"inline-block", width:"20px", height:"20px"}} src="/minus.png" alt="" 
+                                                    onClick={() => delFile(file)}/><br/>
+                                                <img src={URL.createObjectURL(file)} width="100px" alt='' style={{ marginRight: "10px" }}/>
+                                            </div>
                                             {(index + 1) % 3 === 0 && <><br /><br /></>}
                                         </span>
                                     )

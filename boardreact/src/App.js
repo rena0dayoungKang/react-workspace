@@ -7,6 +7,7 @@ import Join from './component/Join';
 import BoardList from './component/BoardList';
 import BoardWrite from './component/BoardWrite';
 import BoardDetail from './component/BoardDetail';
+import BoardModify from './component/BoardModify';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exect path="/join" element={<Join/>}></Route>
         <Route exect path="/boardWrite" element={<BoardWrite/>}></Route>
         <Route exect path="/boardDetail/:num" element={<BoardDetail/>}></Route>
+        <Route exect path="/boardModify/:num" element={<BoardModify/>}></Route>
       </Routes>
     </div>
   );

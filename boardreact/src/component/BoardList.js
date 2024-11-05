@@ -17,7 +17,13 @@ const BoardList = () => {
     }
 
     const boardDelete = (num) => {
-
+        axios.get(`${url}/boardDelete/${num}`)
+             .then(res => {
+                if(res.data === true) {
+                    const remainBoard = boardList.filter(b => b.num !== num);
+                    setBoardList([...remainBoard]);
+                }
+             })
     }
 
     useEffect(() => {
@@ -64,12 +70,14 @@ const BoardList = () => {
 
             <Table bordered style={{ margin: "0 auto", width: "900px" }}>
                 <thead>
+                    <tr>
                     <th>번호</th>
                     <th>제목</th>
                     <th>작성자</th>
                     <th>작성일</th>
                     <th>조회수</th>
                     <th>삭제</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {

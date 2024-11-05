@@ -9,6 +9,7 @@ const BoardDetail = () => {
     //boardDto랑 이름이 같아야함 (다 있어야하는건 아님)
     const [board, setBoard] = useState({num:'', subject:'', content:'', writer:'', fileNums:''});
     const [fileNumList, setFileNumList] = useState([]);
+    const [heart, setHeart] = useState();
     
     const { num } = useParams();
 
@@ -23,8 +24,9 @@ const BoardDetail = () => {
     useEffect(() => {
         axios.get(`${url}/boardDetail/${num}`)
             .then(res => {
-                let resBoard = res.data; 
+                let resBoard = res.data.board; 
                 setBoard({...resBoard})
+                setHeart(res.data.heart)
                 /* 
                     이미지를 올릴 때 board에서 file을 참조하고 있지만, 
                     fileNum에 대한 정보는 board에 없다. 
@@ -44,6 +46,17 @@ const BoardDetail = () => {
                 console.log(err);
             })
     }, [])
+
+    const heartClick = (e) => {
+        const param = {id:'hong', num:board.num};
+        axios.post(`${url}/boardLike`, param)
+            .then(res => {
+                setHeart(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     return (
         <>
@@ -79,8 +92,9 @@ const BoardDetail = () => {
                         <tr>
                             <td></td>
                             <td>
-                                <Button color="primary" tag="a" href="/">수정</Button>&nbsp;&nbsp;
+                                <Button color="primary" tag="a" href={`/boardModify/${board.num}`}>수정</Button>&nbsp;&nbsp;
                                 <Button color="primary" tag="a" href="/">목록</Button>&nbsp;&nbsp;
+                                <img src={heart===true? '/heart.png':'/blackheart.png'} alt='' width='30px' onClick={heartClick}/>
                             </td>
                         </tr>
                     </tbody>

@@ -4,18 +4,23 @@ export default function Section7() {
     const items = [
         {
             src:"/img/card-1.png",
+            caption:''
         },
         {
             src:"/img/card-2.png",
+            caption:''
         },
         {
             src:"/img/card-3.png",
+            caption:''
         },
         {
             src:"/img/card-4.png",
+            caption:''
         },
         {
             src:"/img/card-5.png",
+            caption:''
         },
     ]
     return(
