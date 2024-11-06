@@ -122,12 +122,15 @@ const BoardModify = () => {
                                     onClick={() => document.getElementById('file').click()} /><br /><br />
                                 {
                                     fileNumList.length !== 0 &&
-                                    fileNumList.map(fn =>
-                                        <div style={{ display: "inline-block" }}>
-                                            <img style={{ display: "inline-block", width: "20px", height: "20px" }} src="/minus.png" alt=""
-                                                onClick={() => delFileNum(fn)} /><br />
-                                            <img key={fn} src={`${url}/image/${fn}`} width="100px" alt='' style={{ marginRight: '10px' }} />
-                                        </div>
+                                    fileNumList.map((fn, index) =>
+                                        <span key={index}>
+                                            <div style={{ display: "inline-block" }}>
+                                                <img style={{ display: "inline-block", width: "20px", height: "20px" }} src="/minus.png" alt=""
+                                                    onClick={() => delFileNum(fn)} /><br />
+                                                <img key={fn} src={`${url}/image/${fn}`} width="100px" alt='' style={{ marginRight: '10px' }} />
+                                            </div>
+                                            {(index + 1) % 4 === 0 && <><br /><br /></>}
+                                        </span>
                                     )
                                 }
                                 {
@@ -139,7 +142,7 @@ const BoardModify = () => {
                                                     onClick={() => delFile(file)} /><br />
                                                 <img src={URL.createObjectURL(file)} width="100px" alt='' style={{ marginRight: "10px" }} />
                                             </div>
-                                            {(index + 1) % 3 === 0 && <><br /><br /></>}
+                                            {((fileNumList===null? 0:fileNumList.length) + index + 1) % 4 === 0 && <><br /><br /></>}
                                         </span>
                                     )
                                 }

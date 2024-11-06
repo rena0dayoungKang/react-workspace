@@ -3,19 +3,21 @@ import { useState, useRef } from 'react'; //랜더링을 위한 useState사용. 
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { url } from '../config';
-import { useSelector } from 'react-redux';
+import { useAtom } from 'jotai/react';
+import { userAtom } from '../atoms';
 
 const BoardWrite = () => {
 
     // 파일목록을 관리할 배열 ...배열복사 사용해야
     const [fileList, setFileList] = useState([]);
-
     const [board, setBoard] = useState({ subject: '', content: '', writer: '' });
+    const [user, setUser] = useAtom(userAtom);
 
     //useNavigate
     const navigate = useNavigate();
     const fRef = useRef();
-    const user = useSelector(state => state.persistedReducer.user);
+    // const user = useSelector(state => state.persistedReducer.user);
+
 
     const divStyle = {
         margin: '0 auto',
@@ -28,13 +30,18 @@ const BoardWrite = () => {
     const edit = (e) => {
         setBoard({ ...board, [e.target.name]: e.target.value });
     }
-
+    const fileChange = (e) => {
+        //onClick, onChange같은 애들은 항상 e를 가지고 온다
+        if (e.target.files.length > 0) {
+            setFileList([...fileList, e.target.files[0],])
+        }
+    }
     const submit = (e) => {
         const formData = new FormData();
         //boardDto의 이름과 같아야 함
         formData.append("subject", board.subject);
         formData.append("content", board.content);
-        formData.append("writer", board.id);
+        formData.append("writer", user.id);
         for (let file of fileList) {
             formData.append('file', file);
         }
@@ -55,17 +62,12 @@ const BoardWrite = () => {
             })
     }
 
-    const fileChange = (e) => {
-        //onClick, onChange같은 애들은 항상 e를 가지고 온다
-        if (e.target.files.length > 0) {
-            setFileList([...fileList, e.target.files[0],])
-        }
-    }
+    
 
     const delFile = (file) => {
-        setFileList({...fileList.filter(f => f!==file)});
+        setFileList({ ...fileList.filter(f => f !== file) });
     }
-    
+
     const fileClick = (e) => {
         fRef.current.click();
     }
@@ -99,16 +101,16 @@ const BoardWrite = () => {
                         <tr>
                             <td><Label>이미지</Label></td>
                             <td>
+                                <Input type="file" id="file" accept='image/*' hidden onChange={fileChange} ref={fRef}/>
                                 <img src="/plus.png" width="100px" height="100px" alt=""
                                     onClick={() => document.getElementById('file').click()} /><br /><br />
-                                <Input type="file" id="file" accept='image/*' hidden onChange={fileChange} />
                                 {
                                     fileList.map((file, index) =>
                                         <span key={index}>
-                                            <div style={{display:"inline-block"}}>
-                                                <img style={{display:"inline-block", width:"20px", height:"20px"}} src="/minus.png" alt="" 
-                                                    onClick={() => delFile(file)}/><br/>
-                                                <img src={URL.createObjectURL(file)} width="100px" alt='' style={{ marginRight: "10px" }}/>
+                                            <div style={{ display: "inline-block" }}>
+                                                <img style={{ display: "inline-block", width: "20px", height: "20px" }} src="/minus.png" alt=""
+                                                    onClick={() => delFile(file)} /><br />
+                                                <img src={URL.createObjectURL(file)} width="100px" alt='' style={{ marginRight: "10px" }} />
                                             </div>
                                             {(index + 1) % 3 === 0 && <><br /><br /></>}
                                         </span>

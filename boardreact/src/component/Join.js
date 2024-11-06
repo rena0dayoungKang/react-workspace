@@ -2,6 +2,7 @@ import { Table, Label, Input, Button } from 'reactstrap';
 import { useState } from 'react';
 import axios from 'axios';
 import { url } from '../config';
+import { useNavigate } from 'react-router';
 
 const Join = () => {
     const [member, setMember] = useState({
@@ -13,12 +14,40 @@ const Join = () => {
         margin: "0 auto", width: '400px', border: "1px solid lightgray",
         borderRadius: '7px', padding: '10px'
     };
+    const [profileImage, setProfileImage] = useState(null);
+    const navigate = useNavigate();
+
     const edit = (e) => {
         setMember({ ...member, [e.target.name]: e.target.value });
     }
 
     const submit = (e) => {
+        let formData = new FormData();
+        formData.append("id", member.id);
+        formData.append("name", member.name);
+        formData.append("password", member.password);
+        formData.append("email", member.email);
+        formData.append("address", member.address);
+        formData.append("nickname", member.nickname);
+        if (profileImage != null) {
+            formData.append("profile", profileImage);
+        }
 
+        axios.post(`${url}/join`, formData)
+            .then(res => {
+                console.log(res.data);
+                navigate("/login");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const fileChange = (e) => {
+        //onClick, onChange같은 애들은 항상 e를 가지고 온다
+        if (e.target.files.length > 0) {
+            setProfileImage(e.target.files[0])
+        }
     }
 
     return (
@@ -48,20 +77,21 @@ const Join = () => {
                             <td><Input type="text" name="address" id="address" onChange={edit} /></td>
                         </tr>
                         <tr>
-                            <td><Label>프로필이미지</Label></td>
-                            <td>
-                                <img src="/plus.png" width="100px" height="100px" alt=""
-                                    onClick={() => document.getElementById('file').click()} /><br /><br />
-                                <Input type="file" name="file" id="file" onChange={edit} hidden accept='image/*' />
-                            </td>
-                        </tr>
-                        <tr>
                             <td><Label for="nickname">닉네임</Label></td>
                             <td><Input type="text" name="nickname" id="nickname" onChange={edit} /></td>
                         </tr>
                         <tr>
+                            <td><Label>프로필이미지</Label></td>
+                            <td>
+                                <img src={profileImage != null ? URL.createObjectURL(profileImage) : "/person.png"}
+                                    width="100px" height="100px" alt="" style={{ borderRadius: "10px" }}
+                                    onClick={() => document.getElementById('file').click()} /><br /><br />
+                                <Input type="file" name="file" id="file" onChange={fileChange} hidden accept='image/*' />
+                            </td>
+                        </tr>
+                        <tr>
                             <td colSpan={2}>
-                                <Button color='primary' style={{width:"100%"}} onClick={submit}>회원가입</Button>
+                                <Button color='primary' style={{ width: "100%" }} onClick={submit}>회원가입</Button>
                             </td>
                         </tr>
                     </tbody>
