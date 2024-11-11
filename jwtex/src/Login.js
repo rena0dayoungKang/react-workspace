@@ -23,6 +23,14 @@ const Login = () => {
         setMember({ ...member, [e.target.name]: e.target.value });
     };
 
+    const redirectUri = "http://localhost:8080/oauth2/callback/kakao";
+    const restAuthKey = "d7025e5c18416e2e0239db5affbce95f";
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${restAuthKey}&redirect_uri=${redirectUri}&response_type=code`;
+
+    const redirect_uri = "http://localhost:8080/oauth2/callback/naver";
+    const restAuth_key = "nQOdhXOX9jDuuJZSwGsv";
+    const naverAuthUrl = `https://nid.naver.com/oauth2.0/authorize?client_id=${restAuth_key}&redirect_uri=${redirect_uri}&response_type=code&state=1357`;
+
     const submit = (e) => {
         let formData = new FormData();
         formData.append("username", member.username);
@@ -33,7 +41,7 @@ const Login = () => {
                 console.log(res);
                 console.log(res.headers.authorization);
                 setToken(res.headers.authorization); //토큰저장
-                navigate("/user"); 
+                navigate("/user");
             })
             .catch((err) => {
                 console.log(err);
@@ -83,6 +91,32 @@ const Login = () => {
                                 >
                                     로그인
                                 </Button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <Label for="kakao">카카오로그인</Label>
+                            </td>
+                            <td>
+                                <a href={kakaoAuthUrl}>
+                                    <img
+                                        src="/kakao_login_medium_narrow.png"
+                                        alt=""
+                                        width="200px"
+                                    />
+                                </a>
+                            </td>
+                            <td>
+                                <Label for="naver">네이버로그인</Label>
+                            </td>
+                            <td>
+                                <a href={naverAuthUrl}>
+                                    <img
+                                        src="/naver_login.png"
+                                        alt=""
+                                        width="200px"
+                                    />
+                                </a>
                             </td>
                         </tr>
                     </tbody>

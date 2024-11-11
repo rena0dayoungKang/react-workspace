@@ -10,4 +10,10 @@ export const initUser = {
     profileImage:'',
     profileImageStr:''
 }
-export const userAtom = atomWithStorage("user", initUser, createJSONStorage(()=>sessionStorage)) ;
+export const userAtom = atomWithStorage("user", initUser, createJSONStorage(()=>sessionStorage));
+
+export const tokenAtom = atomWithStorage(
+    'token',
+    '',
+    createJSONStorage(() => sessionStorage),
+) 

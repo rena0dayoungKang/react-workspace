@@ -61,6 +61,23 @@ const BoardDetail = () => {
                 console.log(err);
             })
     }
+    
+    const fileDownload = (fn) => {
+        axios.get(`${url}/fileDown?file=${fn}`, 
+            {responseType : 'blob'}
+        )
+        .then(res => {
+            const blob = new Blob([res.daat], {
+                type : "image/jpeg",
+            });
+            const tempLink = document.createElement("a");
+            tempLink.setAttribute("href", URL.createObjectURL(blob));
+            tempLink.setAttribute("download", `${fn}`);
+            tempLink.click();
+            URL.revokeObjectURL(tempLink.href);
+        })
+
+    }
 
     return (
         <>
@@ -88,7 +105,7 @@ const BoardDetail = () => {
                                     fileNumList.length !== 0 &&
                                     fileNumList.map(fn =>
                                         <img key={fn} src={`${url}/image/${fn}`} width="100px" alt=''
-                                            style={{ marginRight: '10px' }} />
+                                            style={{ marginRight: '10px' }} onClick={() => fileDownload(fn)}/>
                                     )
                                 }
                             </td>

@@ -3,6 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
+import Token from "./Token";
 import User from "./User";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <BrowserRouter>
             <Routes>
               <Route exect path="/" element={<Login/>}/>
+              <Route exect path="/login" element={<Token/>}/>
               <Route exect path="/user" element={<User/>}/>
             </Routes>
         </BrowserRouter>
