@@ -6,7 +6,7 @@ export default function AllAccountInfo() {
     const [accs, setAccs] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:8080/allAccountInfo")
+        axios.get("http://13.124.129.97:8080/allAccountInfo")
             .then(res => {
                 console.log(res.data);
                 setAccs([...res.data]);

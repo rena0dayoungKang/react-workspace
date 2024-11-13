@@ -12,7 +12,7 @@ export default function AccountInfo() {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.get(`http://localhost:8080/accountInfo/${acc.id}`)
+        axios.get(`http://13.124.129.97:8080/accountInfo/${acc.id}`)
              .then(res => {
                 console.log(res.data);
                 setAcc({... res.data});

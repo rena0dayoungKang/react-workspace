@@ -13,7 +13,7 @@ export const Withdraw = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/withdraw", withdraw)
+        axios.post("http://13.124.129.97:8080/withdraw", withdraw)
             .then(res => {
                 console.log(res)
                 setMessage(`출금 성공 (잔액 : ${res.data})`);

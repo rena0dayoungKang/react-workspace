@@ -12,7 +12,7 @@ export default function Login() {
     }
 
     const submit = (e) => {
-        axios.post("http://localhost:8080/login", login)
+        axios.post("http://13.124.129.97:8080/login", login)
             .then(res => {
                 console.log(res.data);
                 dispatch({type:'USER', data:{...res.data}});

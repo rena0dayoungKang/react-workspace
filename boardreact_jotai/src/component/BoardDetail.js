@@ -36,7 +36,7 @@ const BoardDetail = () => {
         // 화면 전환되자마자 데이터가 보여야함
         const param = { id: user.id, num: board.num };
         axios
-            .post(`${url}/boardDetail/${num}`)
+            .post(`${url}/boardDetail`, param)
             .then((res) => {
                 let resBoard = res.data.board;
                 setBoard({ ...resBoard });

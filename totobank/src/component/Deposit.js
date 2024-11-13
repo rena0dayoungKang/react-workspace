@@ -13,7 +13,7 @@ export const Deposit = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/deposit", deposit)
+        axios.post("http://13.124.129.97:8080/deposit", deposit)
             .then(res => {
                 console.log(res)
                 setMessage(`입금 성공 (잔액 : ${res.data})`);

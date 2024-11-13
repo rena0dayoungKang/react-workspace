@@ -35,7 +35,7 @@ export default function Join() {
             address: member.address + ' ' + member.extraAddress + ' ' + member.detailAddress
         }
 
-        axios.post("http://localhost:8080/join", smember)
+        axios.post("http://13.124.129.97:8080/join", smember)
             .then(res => {
                 console.log(res);
                 window.location.href = "/login";
@@ -57,7 +57,7 @@ export default function Join() {
 
     const checkId = (e) => {
         e.preventDefault();
-        axios.get(`http://localhost:8080/checkMemId/${member.id}`)
+        axios.get(`http://13.124.129.97:8080/checkMemId/${member.id}`)
             .then(res => {
                 if (res.data === true) {
                     alert("사용중인 아이디입니다.");

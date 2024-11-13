@@ -39,7 +39,7 @@ export const MakeAccount = () => {
         console.log(acc);
         setIsBefore(false);
         // 백엔드와 연결하는 axios
-        axios.post("http://localhost:8080/makeAccount", acc)
+        axios.post("http://13.124.129.97:8080/makeAccount", acc)
             .then(res => {
                 console.log(res);
                 if (res.data === true) {
@@ -56,7 +56,7 @@ export const MakeAccount = () => {
 
     const checkAccId = (e) => {
         e.preventDefault();
-        axios.get(`http://localhost:8080/checkAccId/${acc.id}`) //백틱임에 주의
+        axios.get(`http://13.124.129.97:8080/checkAccId/${acc.id}`) //백틱임에 주의
             .then(res => {
                 setModal(true);
                 if (res.data === true) {

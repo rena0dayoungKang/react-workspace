@@ -13,7 +13,7 @@ export default function Transfer() {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/transfer", transfer)
+        axios.post("http://13.124.129.97:8080/transfer", transfer)
              .then(res => {
                 setMessage(`송금 성공 (잔액 : ${res.data}원)`);
                 setIsModal(true);
