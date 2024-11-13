@@ -1,14 +1,16 @@
 import { Nav, Navbar, NavItem, NavLink, NavbarBrand } from 'reactstrap';
-import { useAtom } from 'jotai/react';
-import { initUser, userAtom } from '../atoms';
+import { useAtom, useSetAtom } from 'jotai/react';
+import { initUser, userAtom, tokenAtom } from '../atoms';
 import { useNavigate } from 'react-router';
 
 const Main = () => {
     const [user, setUser] = useAtom(userAtom);
+    const setToken = useSetAtom(tokenAtom);
     const navigate = useNavigate();
 
     const logout = () => {
         setUser({ ...initUser });
+        setToken('');
         navigate("/login");
     }
     

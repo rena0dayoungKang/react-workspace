@@ -28,6 +28,9 @@ const BoardList = () => {
                     setBoardList([...remainBoard]);
                 }
              })
+             .catch(err => {
+                console.log(err)
+             })
     }
 
     useEffect(() => {
